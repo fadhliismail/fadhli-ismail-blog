@@ -3,9 +3,9 @@ module.exports = {
     title: `M. Fadhli Ismail`,
     author: `Fadhli Ismail`,
     description: `Day-to-day life of me.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    siteUrl: `https://fadhliismail.netlify.app/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `mfadhliismail`,
     },
   },
   plugins: [
@@ -57,13 +57,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `M. Fadhli Ismail`,
+        short_name: `Fadhli Ismail`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/fi-icon.png`,
       },
     },
     `gatsby-plugin-react-helmet`,

@@ -218,11 +218,7 @@ Here is the BST from the first picture in this article.
 
 ![An image of Binary Search Tree](./binary-search-tree.png)
 
-A pre-order traversal will return [10, 6, 3, 8, 15, 20].
-
-An in-order traversal will return [3, 6, 8, 10, 15, 20].
-
-A post-order traversal will return [3, 8, 6, 20, 15, 10].
+A pre-order traversal will return [10, 6, 3, 8, 15, 20]. An in-order traversal will return [3, 6, 8, 10, 15, 20]. A post-order traversal will return [3, 8, 6, 20, 15, 10].
 
 The following is the implementation of pre-order DFS.
 

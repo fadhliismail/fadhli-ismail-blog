@@ -1,15 +1,16 @@
 ---
 title: Binary Search Tree
-date: "2020-01-20T20:43:00.000Z"
-description: "Binary Search Tree"
+date: "2020-04-16T11:50:00.000Z"
+description: "Binary Search Tree and Tree Traversal"
 ---
 
 So, what is a tree?
 
-Tree is a data structure that consist of nodes in a parent and child relationship. It is a non-linear data structure made up of root, parent, child siblings, leaf, and edge.
+Tree is a data structure that consist of nodes in a parent and child relationship. It is a non-linear data structure made up of root, parent, child, siblings, leaf, and edge.
 
 There are many application of tree all around us. We can see it in HTML DOM, network routing, computer file systems, artificial intelligence, etc.
 
+___
 Binary search tree
 
 One common example of tree data structure is binary tree. A binary tree has a parent nodes with at most two childrens. A binary tree tree is unsorted.
@@ -20,7 +21,7 @@ A sorted binary tree is known as a binary search tree. Children node to the righ
 
 The following is the code to instantiate a binary search tree.
 
-```
+```javascript
 class Node {
     constructor(value) {
         this.value = value;
@@ -43,7 +44,7 @@ Populating Binary Search Tree is pretty straightforward. For every possible new 
 
 Let say we want to insert node of value 13 into the BST below. What happen is we will compare the value 13 to value 10. As the value is greater, we move to the right to compare it to the next value which is 15. Node of value 13 is less than 15, and as there is no value to the left of 15, 13 will be inserted there.
 
-![Inserting into a Binary Search Tree](./bst-insert.jpeg)
+![Inserting into a Binary Search Tree](./bst-insert.jpg)
 
 To insert a value into the tree, we can either do it iteratively or recursively. The main idea is the same for both method.
 
@@ -51,7 +52,7 @@ First we create new node to store the new value. Then, we chek if there is a val
 
 The following is the code to insert a value into the tree iteratively.
 
-```
+```javascript
 class BinarySearchTree {
     constructor() {
         this.root = null;
@@ -108,7 +109,7 @@ tree.insert(15);
 
 Finding a value from the tree is pretty much using the same idea. For the value that we want to search for, compare it to the current node values. If the value is higher, move the right, and left otherwise.
 
-```
+```javascript
 class BinarySearchTree() {
     constructor() {
         this.root = null;
@@ -162,19 +163,20 @@ Time complexity of Binary Search Tree (Big O)
 
 On average, BST has a time complexity of O(log N). The simple explanation for this is that, everytime we add or find a value, the act of moving from node to node effectively cutting the data set in half.
 
+___
+Tree Traversal
+
 So now we have a fully functioning tree, how about if we want to traverse it.
 
 There are two ways of traversing a tree; Breadth-first Search (BFS), and Depth-first Search (DFS).
 
-In DFS, we will visit every sibling nodes first before moving on the the children.
-
-In BFS, we will be moving downward to the depth of the tree, visiting all the children, before moving on to the siblings and their children.
+In DFS, we will visit every sibling nodes first before moving on the the children. In BFS, we will be moving downward to the depth of the tree, visiting all the children, before moving on to the siblings and their children.
 
 ![Breadth-first Search and Depth-first Search](./bfs-dfs.gif)
 
 The following is the implementation of BFS.
 
-```
+```javascript
 class BinarySearchTree() {
     constructor() {
         this.root = null;
@@ -209,20 +211,15 @@ class BinarySearchTree() {
 
 tree.BFS();
 ```
-
 There are three variants of DFS, pre-order, in-order, and post-order. These affect how the we traverse the tree as it will output different order of node values of the BST.
 
-A pre-order traversal will output the root or parent node, then the left node, and then finally the right node. An in-order traversal will output the left node, then the root or parent node, and at the end the right node. A post-order traversal will output the left node, followed by the right node, and finally the root node.
-
-Here is the BST from the first picture in this article.
+Let me show you again our binary tree from earlier in the article. We will see how applying the pre-order DFS works on the tree.
 
 ![An image of Binary Search Tree](./binary-search-tree.png)
 
-A pre-order traversal will return [10, 6, 3, 8, 15, 20]. An in-order traversal will return [3, 6, 8, 10, 15, 20]. A post-order traversal will return [3, 8, 6, 20, 15, 10].
-
 The following is the implementation of pre-order DFS.
 
-```
+```javascript
 class BinarySearchTree() {
     constructor() {
         this.root = null;
@@ -230,7 +227,7 @@ class BinarySearchTree() {
 
     // Create a variable to store the values of nodes visited
     // Store the root of the BST in a variable rootNode
-    // Write a helper function which accepts a node
+    // Helper function which accepts a node
         // Push the value of the node to the variable that stores the visited node
         // If the node has a left property, call the helper function on the left property.
         // If the node has a right property, call the helper function on the right property
@@ -254,3 +251,69 @@ class BinarySearchTree() {
 
 tree.DFSPreOrder();
 ```
+A pre-order traversal will output the root or parent node, then the left node, and then finally the right node. A pre-order traversal of the binary tree diagram in this post earlier will return [10, 6, 3, 8, 15, 20].
+
+Meanwhile, the following is the implementation of in-order DFS. The implementation is the same as pre-order with one small difference in the `traverse` function.
+
+```javascript
+class BinarySearchTree() {
+    constructor() {
+        this.root = null;
+    }
+
+    // Helper function which accepts a node
+        // If the node has a left property, call the helper function on the left property.
+        // Push the value of the node to the variable that stores the visited node
+        // If the node has a right property, call the helper function on the right property.
+
+    DFSInOrder() {
+        var visited = [];
+        var rootNode = tree.root;
+
+        function traverse(node) {
+            if(node.left) traverse(node.left);
+            visited.push(node);
+            if(node.right) traverse(node.right);
+        }
+
+        traverse(rootNode);
+        return visited;
+    }
+}
+
+tree.DFSInOrder();
+```
+An in-order traversal will output the left node, then the root or parent node, and at the end the right node. An in-order traversal will return [3, 6, 8, 10, 15, 20].
+
+Same as pre-order and in-order, the implementation of post-order has one small difference in the `traverse` function.
+
+```javascript
+class BinarySearchTree() {
+    constructor() {
+        this.root = null;
+    }
+
+    // Helper function which accepts a node
+        // If the node has a left property, call the helper function on the left property.
+        // Push the value of the node to the variable that stores the visited node
+        // If the node has a right property, call the helper function on the right property.
+
+    DFSPostOrder() {
+        var visited = [];
+        var rootNode = tree.root;
+
+        function traverse(node) {
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+            visited.push(node);
+        }
+
+        traverse(rootNode);
+        return visited;
+    }
+}
+
+tree.DFSPostOrder();
+```
+
+A post-order traversal will output the left node, followed by the right node, and finally the root node. A post-order traversal will return [3, 8, 6, 20, 15, 10].

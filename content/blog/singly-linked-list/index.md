@@ -4,15 +4,22 @@ date: "2020-01-23T13:19:00.000Z"
 description: "Singly Linked List"
 ---
 
-### What is a linked list?
+A linked list is a data structure that have a head, a tail, and length property. It is consists of multiple nodes which hold values, with a pointer to another node or null values. In short, a linked list is a bunch of nodes pointing to another nodes. A linked list has no indexes, connected via nodes with a next pointer, and random access in linked list is impossible. In ordert to access data in a linked list, we have to traverse the list to find any one element.
 
-A linked list is a data structure that have a head, a tail, and length property. It is consists of multiple nodes which hold values, with a pointer to another node or null values. In short, a linked list is a bunch of nodes pointing to another nodes.
+Following is the comparisons of List and Array. I put it in a table for easy viewing.
 
-### Singly Linked List
+|Lists|Arrays|
+|---|---|---|
+|No indexes|Indexed in order!|
+|Connected via nodes with a next pointer|Insertion and deletion can be expensive|
+|Random access is not allowed|Can be quickly accessed at a specific index|
+___
 
-In this article, I will talk about Singly Linked List, which is a one directional list. In summary, a linked list has no indexes, it's connected via nodes with a next pointer, and random access in linked list is impossible.
+Singly Linked List
 
-```
+In this article, I will write about Singly Linked List. Singly Linked List is a one directional list. An example use case is when dealing with large dataset where we need to constantly add or remove data from the beginning or end of the data set. Following is the basic codes to initialize a Singly Linked List. 
+
+```javascript
 // a linked list is made up of nodes
 class Node {
     constructor(value) {
@@ -29,30 +36,18 @@ class SinglyLinkedList {
         this.length = 0;    // and length to 0
     }
 }
+
+let singlyLinkedList = new SinglyLinkedList();
 ```
+As you can see, we have two classes. A `Node` class and a `SinglyLinkedList` class. The `Node` class will be used to instantiate a new node which will hold the data, together with a pointer to the next node. The `SinglyLinkedList` class meanwhile will store the head node and the tail node together with the total length of the list.
 
-With the above code, we will be able to initialize a Singly Linked List with nothing inside it.
+![Singly Linked List](./singly-linked-list.png)
 
-### Pushing
+Right now, we can only initialize a list. What good can it be if the list cannot hold any data?  
 
-`push()` method is use to add a node at the end of the linked list.
+We can create a `push()` method to add a node to the list. By default, all nodes will always be added to the end of a linked list. Following is the code together with the method to add nodes to the list.
 
-```
-- function should accept a value
-- Create a new node with the value passed to the function
-- if there is no head property on the list, set the head and
-tail to be the newly created node
-- otherwise set the next property on the tail to be the new
-node and update the tail property on the list to be the newly
-created node.
-- increment the length by one
-- return the linked list
-
-```
-
-The code in JavaScript,
-
-```
+```javascript
 class SinglyLinkedList {
     constructor() {
         this.head = null;
@@ -60,37 +55,30 @@ class SinglyLinkedList {
         this.length = 0;
     }
 
+    // The function should accept a value
+    // Create a new node which store the new value
+    // If there is no head property in the list, set the head and tail to be the newly created node.
+    // Otherwise, set the next property on the tail to be the new node and update the tail property to be the newly created node.
+    // increment the length by one
+    // return the linked list
     push(value) {
-        var newNode = new Node(value);  // initialize a new node with value
-        if(!this.head) {                // check if the value of head exist (not null)
-            this.head = newNode;        // if head has no value, set the head to newNode
-            this.tail = this.head;      // and the tail to the head (newNode)
+        var newNode = new Node(value); 
+        if(!this.head) {               
+            this.head = newNode;       
+            this.tail = this.head;     
         } else {
-            this.tail.next = newNode;   // if there is a head, set the newNode in addition to the end of the tail
-            this.tail = newNode;        // and set that new added node as the new tail
+            this.tail.next = newNode;   
+            this.tail = newNode;        
         }
-        this.length++;                  // increment length of the list by 1
-        return this;                    // return the list
+        this.length++;                  
+        return this;                    
     }
 }
 ```
-
-### Popping
+<br>
 
 `pop()` is a method to remove a node from the end of the linked list. Push and pop. Get it?
-
-```
-- if there are no nodes in the list, return undefined
-- loop through the list until we reach the tail
-- set the next property of the 2nd to last node to be null
-- set the tail to be the 2nd to last node
-- decrement the length of the list by 1
-- return the value of the node removed
-```
-
-In Javascript,
-
-```
+```javascript
 class SinglyLinkedList {
     constructor() {
         this.head = null;
@@ -98,28 +86,90 @@ class SinglyLinkedList {
         this.length = 0;
     }
 
-    push(value) {...}
+    // Return undefined if there are no nodes in the list.
+    // Set variable currentNode to this.head and variable beforeTail equal to the currentNode.
+    // Loop through the list until we reach the tail end of the list while(currentNode.next)
+        // Reassign beforeTail to currentNode
+        // Reassign current to current.next
+    // Set this.tail to be beforeTail (if our code above is correct, this will be the node before the tail end)
+    // Set the next property of the tail to null (effectively deleting the old tail)
+    // Decrement the value of the list by 1
+    // return the value of the node removed (the pop() value)
 
     pop() {
-        if(!this.head) return undefined;    // check if there is nodes in the list
+        if(!this.head) return undefined;    
 
-        var current = this.head;            // set var current equal to current head
-        var beforeTail = current;           // set var beforeTail equal to current (our target is the value just before the current tail)
-        while(current.next) {               // while loop will continue running as long as current.next is not null
-            beforeTail = current;           // this loop will get current to be reassign to current.next
+        var current = this.head;            
+        var beforeTail = current;           
+        while(current.next) {              
+            beforeTail = current;           
             current = current.next;
         }
-        this.tail = beforeTail;             // set this.tail to be the value just before the current tail, effectively take away pointer
-        this.tail.next = null;              // to the old tail. Set this tail.next value to null (before this its pointing to old tail)
-        this.length--;                      // decrement the length of list by 1
+        this.tail = beforeTail;            
+        this.tail.next = null;              
+        this.length--;                      
 
         // if no item left
         if(this.length === 0) {
         this.head = null;
         this.tail = null;
         }
-        return current;                     // return the pop() value
+        return current;                    
     }
 }
-
 ```
+<br>
+
+Singly Linked List also has a way to add and remove nodes from the beginning of the list. We can call removing the nodes to the front as `shift`, while adding the nodes as `unshift`. Following is the code for the `shift` and `unshift` methods.
+
+```javascript
+class SinglyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = null;
+    }
+
+    // if there are no nodes in the list, return undefined.
+    // Store the current head property in a temp variable
+    // Set the head property to be the current head's next property
+    // Decrement the length by 1
+    // return the value of the node removed
+    shift() {
+        if(!this.head) return undefined;
+
+        var temp = this.head;
+        this.head = this.head.next;
+        this.length--;
+
+        // if no item left
+        if(this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+
+        return temp;
+    }
+
+    // Create a new node with value passed to the function
+    // If there is no head property, set the head and tail to be the newly created node.
+    // Otherwise, set the newly created node's next property to be the current head property on the list
+    // Set the head property to be the newly created node
+    // increment the length of the list by 1
+    // return the linked list
+    unshift(value) {
+        var newNode = new Node(value);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
+}
+```
+
+

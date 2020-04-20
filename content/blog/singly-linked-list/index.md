@@ -6,14 +6,15 @@ description: "Singly Linked List"
 
 A linked list is a data structure that have a head, a tail, and length property. It is consists of multiple nodes which hold values, with a pointer to another node or null values. In short, a linked list is a bunch of nodes pointing to another nodes. A linked list has no indexes, connected via nodes with a next pointer, and random access in linked list is impossible. In ordert to access data in a linked list, we have to traverse the list to find any one element.
 
-Following is the comparisons of List and Array. I put it in a table for easy viewing.
+Following is the simple comparisons of List and Array. I put it in a table for easy viewing.
 
 |Lists|Arrays|
 |---|---|---|
 |No indexes|Indexed in order!|
 |Connected via nodes with a next pointer|Insertion and deletion can be expensive|
 |Random access is not allowed|Can be quickly accessed at a specific index|
-___
+
+<br>
 
 Singly Linked List
 

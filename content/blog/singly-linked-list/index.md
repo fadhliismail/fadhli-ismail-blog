@@ -1,6 +1,6 @@
 ---
 title: Singly Linked List
-date: "2020-01-23T13:19:00.000Z"
+date: "2020-04-20T15:28:00.000Z"
 description: "Singly Linked List"
 ---
 
@@ -17,7 +17,7 @@ ___
 
 Singly Linked List
 
-In this article, I will write about Singly Linked List. Singly Linked List is a one directional list. An example use case is when dealing with large dataset where we need to constantly add or remove data from the beginning or end of the data set. Following is the basic codes to initialize a Singly Linked List. 
+In this article, I will write about Singly Linked List. Singly Linked List or SLL is a one directional list. An example use case is when dealing with large dataset where we need to constantly add or remove data from the beginning or end of the data set. Following is the basic codes to initialize a Singly Linked List. 
 
 ```javascript
 // a linked list is made up of nodes
@@ -45,7 +45,13 @@ As you can see, we have two classes. A `Node` class and a `SinglyLinkedList` cla
 
 Right now, we can only initialize a list. What good can it be if the list cannot hold any data?  
 
-We can create a `push()` method to add a node to the list. By default, all nodes will always be added to the end of a linked list. Following is the code together with the method to add nodes to the list.
+<br>
+
+Push and Pop
+
+We can create a `push()` method to add a node and populate the list. By default, all nodes will always be added to the end of a linked list. `pop()` meanwhile is a method to remove a node from the end of the linked list. Push and pop. Get it?
+
+Following is the code together with the methods to add and remove nodes from the list.
 
 ```javascript
 class SinglyLinkedList {
@@ -72,18 +78,6 @@ class SinglyLinkedList {
         }
         this.length++;                  
         return this;                    
-    }
-}
-```
-<br>
-
-`pop()` is a method to remove a node from the end of the linked list. Push and pop. Get it?
-```javascript
-class SinglyLinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-        this.length = 0;
     }
 
     // Return undefined if there are no nodes in the list.
@@ -119,8 +113,11 @@ class SinglyLinkedList {
 }
 ```
 <br>
+<br>
 
-Singly Linked List also has a way to add and remove nodes from the beginning of the list. We can call removing the nodes to the front as `shift`, while adding the nodes as `unshift`. Following is the code for the `shift` and `unshift` methods.
+Shift and Unshift
+
+Singly Linked List also has a way to add and remove nodes from the beginning of the list. We can call removing the nodes from the front as `shift`, while adding the nodes as `unshift`. Following are the codes for the `shift` and `unshift` methods.
 
 ```javascript
 class SinglyLinkedList {
@@ -168,6 +165,52 @@ class SinglyLinkedList {
         }
         this.length++;
         return this;
+    }
+}
+```
+<br>
+<br>
+
+Get and Set
+
+`get` method is for retrieving a node by it's position in the linked list. `set` method is for changing the value of a node based on it's position in the list. Following are the codes for `get` and `set` methods.
+
+```javascript
+class SinglyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = null;
+    }
+
+    // Function should accept an index value
+    // If the index is less than zero or greater than or equal to the length of the list return null
+    // Loop through the list until we reach the index and return the node t tht specidfied index.
+
+    get(index) {
+        if(index < 0 || index >= this.length) return null;
+
+        var counter = 0;
+        var currentNode = this.head;
+        while(counter < index) {
+            currentNode = currentNode.next;
+            counter++;
+        }
+        return currentNode;
+    }
+
+    // Function should accept a value and an index value
+    // use the get function to find the specific node
+    // If the node is not found, return false
+    // if the node is found, set the value of that node to be the value passed to the function and return true
+
+    set(value, index) {
+        var foundNode = this.get(index);
+        if(foundNode) {
+            foundNode.val = value;
+            return true;
+        }
+        return false;
     }
 }
 ```
